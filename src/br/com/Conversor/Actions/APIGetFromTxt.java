@@ -45,7 +45,7 @@ public class APIGetFromTxt {
     private void createTxt(){
         try {
             FileWriter createApiTxt = new FileWriter("apiKey.txt");
-            createApiTxt.write("'Your API key here'");
+            createApiTxt.write("YourAPIkeyhere");
             createApiTxt.close();
         } catch (IOException e){
             throw new RuntimeException("Erro desconhecido na criação de arquivo apiKey.txt");

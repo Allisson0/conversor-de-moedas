@@ -6,7 +6,6 @@ import br.com.Conversor.Exception.APIKeyNotFoundException;
 import br.com.Conversor.Exception.APITextNotFoundException;
 import br.com.Conversor.Exception.InactiveAccountException;
 
-import javax.sound.midi.SysexMessage;
 import java.util.Scanner;
 
 public class Main {
@@ -53,18 +52,12 @@ public class Main {
                         System.out.println("Informe o valor que será convertido: ");
                         value = NumberConvertion.toDouble(input.nextLine());
                         conversao.conversionPair(from, to, value);
-
-                        System.out.println("\nInsira qualquer caractere para continuar.");
-                        input.nextLine();
                         break;
 
                     case 3:
                         System.out.println("Insira uma moeda para ver as suas conversões: ");
                         from = input.nextLine();
                         conversao.conversionAll(from);
-
-                        System.out.println("\nInsira qualquer caractere para continuar.");
-                        input.nextLine();
                         break;
 
                     case 4:
