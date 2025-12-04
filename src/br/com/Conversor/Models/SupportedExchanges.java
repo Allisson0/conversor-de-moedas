@@ -8,7 +8,7 @@ import java.util.*;
 
 public class SupportedExchanges {
     private LinkedHashMap<String, String> codes;
-    private final static int lengthPage = 10;
+    private final static int lengthPage = 20;
     private Scanner input = new Scanner(System.in);
 
     public LinkedHashMap<String, String> getCodes(){
@@ -56,11 +56,16 @@ public class SupportedExchanges {
     private void interactiveMenu(List<Map.Entry<String, String>> list, int amountItems, int amountPages, String from){
         //Define a página inicial como 1
         int actualPage = 1;
+        //Define um layout de impressão de duas colunas
+        String layout = from.isEmpty() ? "%-50s %s%n" : "%-20s %s%n";
+        //Distância do espaçamento da amostragem da página
+        String space = from.isEmpty() ? "\t\t\t\t" : "";
         while(true){
+            System.out.println("Foram encontradas " + list.size() + " moedas disponíveis para conversão.");
             System.out.println(from.isEmpty() ?
-                    "\nConversões gerais da moeda: " + from :
+                    "Conversões gerais da moeda: " + from :
             "\nLista de moedas disponíveis para conversão: ");
-            System.out.println("\n--Página + " +actualPage + " / " + amountPages + "--");
+            System.out.println("\n" + space + "========== Página " +actualPage + " de " + amountPages + " ==========");
 
             //Define o começo da listagem como a página atual - 1 vezes a quantidade de itens por página
             int start = (actualPage - 1) * lengthPage;
@@ -72,16 +77,36 @@ public class SupportedExchanges {
 
             //Para cada i entre start e end, mapeia uma entrada de caracteres e imprimi ele
             //Assim, lista conforme a página atual
-            for (int i = start; i < end; i++){
+            for (int i = start; i < end; i+=2){
+                //Salva a entrada da primeira coluna
                 Map.Entry<String, String> entry = list.get(i);
-                System.out.printf("%s: %s\n", entry.getKey(), entry.getValue());
+                //Cria a primeira coluna
+                String firstColumn = entry.getKey() + " : " + entry.getValue();
+
+                //Cria a string que armazena a segunda coluna
+                String secondColumn = "";
+                //Se o i + 1 não ultrapassar o tamanho da lista
+                if (i + 1 < end) {
+                    //Salva a entrada da segunda coluna
+                    Map.Entry<String, String> secondEntry = list.get(i + 1);
+                    //Atribui ao String da segunda coluna, os argumentos dela
+                    secondColumn = secondEntry.getKey() + " : " + secondEntry.getValue();
+                }
+
+                //Imprime as colunas
+                System.out.printf(layout, firstColumn, secondColumn);
             }
+
+            //Paginação
+            System.out.println(space + "========== Página " +actualPage + " de " + amountPages + " ==========");
 
             //Menu de escolha de página
             System.out.println("Escolha uma página ou digite 0 para sair: ");
 
+            //Escolha da página
             int choose = NumberConvertion.toInteger(input.nextLine());
 
+            //verifica a escolha da página
             if (choose == 0){
                 System.out.println("Saindo...");
                 break;

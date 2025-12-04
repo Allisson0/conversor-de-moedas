@@ -34,11 +34,11 @@ public class Main {
             chooseInt = NumberConvertion.toInteger(choose);
 
             if(chooseInt == 4){
+                System.out.println("Saindo do programa...");
                 break;
             }
 
             try {
-
                 switch (chooseInt){
                     case 1:
                         conversao.showConversion();
@@ -60,15 +60,9 @@ public class Main {
                         conversao.conversionAll(from);
                         break;
 
-                    case 4:
-                        System.out.println("Saindo do programa...");
-                        break;
-
                     default:
                         System.out.println("Por favor, insira uma opção válida.");
                 }
-
-
 
             //Erro de API
             } catch (APIKeyNotFoundException e) {

@@ -54,6 +54,7 @@ public class Conversion {
     //Mostra a conversão direta em várias moedas diferentes de uma escolhida
     public void conversionAll(String from){
 
+        //Pega a requisição da conversão de todas as moedas
         String response = getRequisition().exchangeAll(from);
 
         Gson gson = new GsonBuilder()
@@ -68,8 +69,10 @@ public class Conversion {
 
     }
 
+    //Mostra a lista de moedas disponíveis para conversão
     public void showConversion(){
 
+        //Pega a requisição de todas as moedas
         String response = getRequisition().showExchanges();
 
         Gson gson = new GsonBuilder()
@@ -79,7 +82,7 @@ public class Conversion {
         SupportedExchangesDataAPI convertingJson = gson.fromJson(response, SupportedExchangesDataAPI.class);
         SupportedExchanges dataExchanges = new SupportedExchanges(convertingJson);
 
-        //Chama a conversão de moeda para todas as moedas disponíveis da API
+        //Mostra as moedas possíveis em forma de lista
         dataExchanges.showExchangesRates();
 
     }
