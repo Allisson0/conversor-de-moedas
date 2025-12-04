@@ -14,6 +14,11 @@ public class Conversion {
     //Cria a requisição da API
     private final APIRequisition requisition = new APIRequisition();
 
+    //Cria um build padrão do gson para conversão da API para objeto
+    private static final Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
+
     public APIRequisition getRequisition() {
         return requisition;
     }
@@ -26,11 +31,6 @@ public class Conversion {
         //lê um json a partir da resposta da requisição
         String json = getRequisition().exchangePair(from, to);
 
-        //cria um novo gson para converter essa requisition
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         //converte esse json num objeto da classe ExchangeRate
         ExchangeRateAPI apiConvertion = gson.fromJson(json, ExchangeRateAPI.class);
         ExchangeRate exchangeRate = new ExchangeRate(apiConvertion);
@@ -38,17 +38,22 @@ public class Conversion {
         //retorna o valor de conversão das moedas
         System.out.println(exchangeRate);
 
-        System.out.println("O valor " + value + " convertido para a moeda é de " + exchangeRate.convertingValues(value));
+        //Printa o valor convertido
+        System.out.printf("O valor %.2f convertido para a moeda é de %.2f\n"
+                , value, exchangeRate.convertingValues(value));
 
-        System.out.println("Deseja converter outro valor? Se sim, digite 'sim', se não, aperte enter:");
+        //Realiza uma pergunta se o usuário quer converter outro valor da mesma conversão
+        System.out.println("Deseja converter outro valor? \nPara sim, digite 'sim', para não, aperte enter:");
         String choose = input.nextLine();
 
+        //Se sim, realiza a conversão
         if (choose.equalsIgnoreCase("sim")) {
             System.out.println("Digite um valor para converter: ");
+            //Define que o valor para conversão é o inserido
             value = NumberConvertion.toDouble(input.nextLine());
+            //Chama o metodo de conversão de pares novamente
             conversionPair(from, to, value);
         }
-
     }
 
     //Mostra a conversão direta em várias moedas diferentes de uma escolhida
@@ -57,16 +62,11 @@ public class Conversion {
         //Pega a requisição da conversão de todas as moedas
         String response = getRequisition().exchangeAll(from);
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         SupportedConversionRateAPI convertingJson = gson.fromJson(response, SupportedConversionRateAPI.class);
         SupportedExchanges dataExchanges = new SupportedExchanges(convertingJson);
 
         //Chama a conversão de moeda para todas as moedas disponíveis da API
         dataExchanges.showConvertionRatesFromOne(from);
-
     }
 
     //Mostra a lista de moedas disponíveis para conversão
@@ -75,15 +75,11 @@ public class Conversion {
         //Pega a requisição de todas as moedas
         String response = getRequisition().showExchanges();
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
+        //conversão do valor da api para o valor do objeto suportado (dataExchanges)
         SupportedExchangesDataAPI convertingJson = gson.fromJson(response, SupportedExchangesDataAPI.class);
         SupportedExchanges dataExchanges = new SupportedExchanges(convertingJson);
 
         //Mostra as moedas possíveis em forma de lista
         dataExchanges.showExchangesRates();
-
     }
 }

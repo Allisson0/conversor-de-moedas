@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -35,7 +36,6 @@ public class APIRequisition {
 
         //Realiza a requisição com base no endereço
         return requisition(address);
-
     }
 
     //Requisição de conversão de uma para várias moedas
@@ -49,7 +49,6 @@ public class APIRequisition {
 
         //Realiza a requisição de todas as conversões da moeda
         return requisition(address);
-
     }
 
     //Mostra todas as moedas disponíveis para conversão
@@ -63,7 +62,6 @@ public class APIRequisition {
 
         //Realiza a requisição de amostragem de moedas disponíveis
         return requisition(address);
-
     }
 
      private String requisition(String address){
@@ -84,8 +82,13 @@ public class APIRequisition {
             //Se não houve erro na busca, retorna essa resposta
             return response.body();
 
-            //Qualquer outro tipo de erro:
-        } catch (IOException | InterruptedException e){
+        //Erro de conexão à API
+        } catch (ConnectException e){
+            throw new RuntimeException("Não foi possível conectar-se à api.\n" +
+                    "Por favor, verifique a sua conexão de internet.");
+        }
+        //Qualquer outro tipo de erro:
+        catch (IOException | InterruptedException e){
             throw new RuntimeException(e.getMessage());
         }
     }

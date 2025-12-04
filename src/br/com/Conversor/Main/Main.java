@@ -27,13 +27,13 @@ public class Main {
         Scanner input = new Scanner(System.in);
         Conversion conversao = new Conversion();
 
-        while(true) {
+        while (true) {
             System.out.println(menu);
 
             choose = input.nextLine();
             chooseInt = NumberConvertion.toInteger(choose);
 
-            if(chooseInt == 4){
+            if (chooseInt == 4) {
                 System.out.println("Saindo do programa...");
                 break;
             }

@@ -17,7 +17,7 @@ public class NumberConvertion {
     public static double toDouble(String value){
         try{
             return Double.parseDouble(value);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Valor inválido, por favor, insira um valor válido:");
             return toInteger(input.nextLine());
         }
