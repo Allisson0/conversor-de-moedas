@@ -14,8 +14,8 @@ public class Main {
                 \n**************** Conversor De Moedas ****************
               
                 1. Exibir lista de moedas disponíveis para conversão;
-                2. Converter moeda em outra;
-                3. Exibir conversões de moeda;
+                2. Exibir conversões de moeda;
+                3. Converter moeda em outra;
                 4. Sair da aplicação.
                 
                 Escolha uma das opções acima:""";
@@ -45,6 +45,12 @@ public class Main {
                         break;
 
                     case 2:
+                        System.out.println("Insira uma moeda para ver as suas conversões: ");
+                        from = input.nextLine();
+                        conversao.conversionAll(from);
+                        break;
+
+                    case 3:
                         System.out.println("Informe a moeda que deseja converter: ");
                         from = input.nextLine();
                         System.out.println("Informe a moeda de destino: ");
@@ -52,12 +58,6 @@ public class Main {
                         System.out.println("Informe o valor que será convertido: ");
                         value = NumberConvertion.toDouble(input.nextLine());
                         conversao.conversionPair(from, to, value);
-                        break;
-
-                    case 3:
-                        System.out.println("Insira uma moeda para ver as suas conversões: ");
-                        from = input.nextLine();
-                        conversao.conversionAll(from);
                         break;
 
                     default:

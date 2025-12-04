@@ -32,6 +32,6 @@ public class ExchangeRate {
 
     @Override
     public String toString(){
-        return "A conversão da moeda " + this.getFrom() + " para a " + this.getTo() + " é de " + this.getConversionRate();
+        return "A taxa de conversão da moeda " + this.getFrom() + " para a " + this.getTo() + " é de " + this.getConversionRate();
     }
 }

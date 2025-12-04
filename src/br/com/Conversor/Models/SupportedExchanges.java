@@ -60,11 +60,12 @@ public class SupportedExchanges {
         String layout = from.isEmpty() ? "%-50s %s%n" : "%-20s %s%n";
         //Distância do espaçamento da amostragem da página
         String space = from.isEmpty() ? "\t\t\t\t" : "";
+        System.out.println("Foram encontradas " + list.size() + " moedas disponíveis para conversão.");
         while(true){
-            System.out.println("Foram encontradas " + list.size() + " moedas disponíveis para conversão.");
+
             System.out.println(from.isEmpty() ?
                     "Conversões gerais da moeda: " + from :
-            "\nLista de moedas disponíveis para conversão: ");
+            "Lista de moedas disponíveis para conversão: ");
             System.out.println("\n" + space + "========== Página " +actualPage + " de " + amountPages + " ==========");
 
             //Define o começo da listagem como a página atual - 1 vezes a quantidade de itens por página
